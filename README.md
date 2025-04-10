@@ -18,7 +18,7 @@ EM generalist is a cutting-edge diffusion-based foundation model designed to rev
 - A foundation model for omni-sample type scanning elecron microscopy (SEM) data
 
 ## Usage Options
-- The well-trained model weights can be downloaded at https://zenodo.org/records/15189402?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImU0ZTFmYjYwLWNlMjktNGEzOS1iODEzLTUyZDZmNTBkOTg5ZiIsImRhdGEiOnt9LCJyYW5kb20iOiJjYzA2MTAwMzg3ZjgyNmJiN2MzZjU4YTA1NGZiNjVjYiJ9.FF8Af3wlGx3HGqzm00B9rBbvh1uJcxj1EfqI43t6yFMwG8z-rnthXJKrZQGl0vKlI300sIh2R4arSQbAe1K0hg
+- The well-trained model weights can be downloaded at https://huggingface.co/10cbvkw/EM_generalist
 
 ### 🌐 Online Demo (Recommended)
 For most users, we recommend our web platform:
