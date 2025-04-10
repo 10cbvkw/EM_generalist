@@ -1,8 +1,8 @@
-# EM All-In-One: A Physics-Driven Diffusion Foundation Model for Electron Microscopy
+# EM generalist: A Physics-Driven Diffusion Foundation Model for Electron Microscopy
 
 ## Overview
 
-EM All-In-One is a cutting-edge diffusion-based foundation model designed to revolutionize electron microscopy (EM) and volumetric EM (vEM) image processing. Our physics-driven approach leverages over 1.7 million EM/vEM images to provide zero-shot solutions for diverse imaging challenges.
+EM generalist is a cutting-edge diffusion-based foundation model designed to revolutionize electron microscopy (EM) and volumetric EM (vEM) image processing. Our physics-driven approach leverages over 1.7 million EM/vEM images to provide zero-shot solutions for diverse imaging challenges.
 
 ## Key Features
 
