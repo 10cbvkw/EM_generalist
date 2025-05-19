@@ -12,17 +12,16 @@ parser = argparse.ArgumentParser(description='DPS 2D suepr-resolution')
 parser.add_argument('--path', type=str, default='', help='input path')
 parser.add_argument('--gamma', type=float, default=1.0, help='step size')
 parser.add_argument('--factor', type=int, default=2, help='fold factor for super-resolution')
+parser.add_argument('--output_path', type=str, help='output path')
 
 args = parser.parse_args()
 path = args.path
+output_path = args.output_path
 gamma = args.gamma
 factor = args.factor
 
-epoch = 999
-checkpoint = ''
-
 # Load the model and scheduler
-model_dir = f"../train/exp/{checkpoint}/weights_ema.epoch_{epoch}.pt"
+model_dir = f"../train/exp/prior_model.pt"
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = torch.load(model_dir).to(device)
 noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule="linear")
@@ -181,4 +180,7 @@ generated_image, generated_patches = posterior_sample(model, noise_scheduler, no
 generated_image = generated_image.detach().cpu().numpy().transpose(0, 2, 3, 1).squeeze()
 generated_patches = generated_patches.detach().cpu().numpy().transpose(0, 2, 3, 1).squeeze()
 
-plt.imsave(f"{path[:-4]}_{checkpoint}_{gamma}_{factor}.png", (generated_image + 1) / 2 * 255, cmap='gray', vmin=0, vmax=255) 
+os.makedirs(output_path, exist_ok=True)
+output_path = os.path.join(output_path, 'output')
+os.makedirs(output_path, exist_ok=True)
+plt.imsave(f"{output_path}/{path[:-4]}_{gamma}_{factor}.png", (generated_image + 1) / 2 * 255, cmap='gray', vmin=0, vmax=255) 

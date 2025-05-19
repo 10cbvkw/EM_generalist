@@ -12,11 +12,33 @@ from functools import partial
 import yaml
 import pickle
 
-epoch = 999
-checkpoint = ''
+parser = argparse.ArgumentParser(description='DPS deblurring')
+parser.add_argument('--gamma', type=float, default=5, help='step size')
+parser.add_argument('--lr', type=float, default=1e-2, help='learning rate for kernel update')
+parser.add_argument('--max_iter', type=int, default=10, help='max iteration for kernel update')
+parser.add_argument('--kernel_size', type=int, default=33, help='kernel size')
+parser.add_argument('--path', type=str, default='', help='input path')
+parser.add_argument('--center_penalty', type=float, default=0.0, help='center_penalty weight')
+parser.add_argument('--l1_penalty', type=float, default=0.0, help='l1_penalty weight')
+parser.add_argument('--l2_penalty', type=float, default=0.0, help='l2_penalty weight')
+parser.add_argument('--sigma_center', type=float, default=7.5, help='size of gaussian kernel for center penalty')
+parser.add_argument('--output_path', type=str, help='output path')
+
+args = parser.parse_args()
+
+gamma = args.gamma
+kernel_size = args.kernel_size
+lr = args.lr
+max_iter = args.max_iter
+input_path = args.path
+output_path = args.output_path
+center_penalty = args.center_penalty
+l1_penalty = args.l1_penalty
+l2_penalty = args.l2_penalty
+sigma_center = args.sigma_center
 
 # Load the model and scheduler
-model_dir = f"../train/exp/{checkpoint}/weights_ema.epoch_{epoch}.pt"
+model_dir = f"../train/exp/prior_model.pt"
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = torch.load(model_dir).to(device)
 noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule="linear")
@@ -229,29 +251,6 @@ def posterior_sample(model, scheduler, noised_image, num_inference_steps=1000, b
 num_inference_steps = 1000
 batch_size = 1
 
-parser = argparse.ArgumentParser(description='DPS deblurring')
-parser.add_argument('--gamma', type=float, default=5, help='step size')
-parser.add_argument('--lr', type=float, default=1e-2, help='learning rate for kernel update')
-parser.add_argument('--max_iter', type=int, default=10, help='max iteration for kernel update')
-parser.add_argument('--kernel_size', type=int, default=33, help='kernel size')
-parser.add_argument('--input_path', type=str, default='', help='input path')
-parser.add_argument('--center_penalty', type=float, default=0.0, help='center_penalty weight')
-parser.add_argument('--l1_penalty', type=float, default=0.0, help='l1_penalty weight')
-parser.add_argument('--l2_penalty', type=float, default=0.0, help='l2_penalty weight')
-parser.add_argument('--sigma_center', type=float, default=7.5, help='size of gaussian kernel for center penalty')
-
-args = parser.parse_args()
-
-gamma = args.gamma
-kernel_size = args.kernel_size
-lr = args.lr
-max_iter = args.max_iter
-input_path = args.input_path
-center_penalty = args.center_penalty
-l1_penalty = args.l1_penalty
-l2_penalty = args.l2_penalty
-sigma_center = args.sigma_center
-
 noised_image = np.load(args.input_path)
 print(noised_image.shape, noised_image.min(), noised_image.max())
 
@@ -267,5 +266,5 @@ generated_patches = generated_patches.detach().cpu().numpy().transpose(0, 2, 3, 
 kernel = kernel.detach().cpu().numpy().squeeze()
 
 print(generated_image.shape, generated_image.min(), generated_image.max())
-plt.imsave(input_path[:-4]+f"{checkpoint}_{gamma}_{kernel_size}_deblur_{l1_penalty}_{l2_penalty}_{center_penalty}_{sigma_center}.png", (generated_image + 1) / 2 * 255, cmap='gray', vmin=0, vmax=255) 
-plt.imsave(input_path[:-4]+f"{checkpoint}_{gamma}_{kernel_size}_deblur_{l1_penalty}_{l2_penalty}_{center_penalty}_{sigma_center}_kernel.png", kernel, cmap='gray', vmin=0, vmax=kernel.max())
+plt.imsave(input_path[:-4]+f"{gamma}_{kernel_size}_deblur_{l1_penalty}_{l2_penalty}_{center_penalty}_{sigma_center}.png", (generated_image + 1) / 2 * 255, cmap='gray', vmin=0, vmax=255) 
+plt.imsave(input_path[:-4]+f"{gamma}_{kernel_size}_deblur_{l1_penalty}_{l2_penalty}_{center_penalty}_{sigma_center}_kernel.png", kernel, cmap='gray', vmin=0, vmax=kernel.max())

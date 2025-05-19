@@ -14,14 +14,11 @@ parser.add_argument('--factor', type=int, help='fold factor for super-resolution
 parser.add_argument('--output_path', type=str, help='output path')
 args = parser.parse_args()
 
-epoch = 999
-checkpoint = ''
-
 path = args.path
 output_path = args.output_path
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-model_dir = f"../train/exp/{checkpoint}/weights_ema.epoch_{epoch}.pt"
+model_dir = f"../train/exp/prior_model.pt"
 model = torch.load(model_dir).to(device)
 noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule="linear")
 
@@ -126,5 +123,8 @@ noised_volume = noised_volume / 255 * 2 - 1
 generated_volumes = posterior_sample(model, noise_scheduler, noised_volume, num_inference_steps, volume_size, gamma, K, interpolate, slice1_, slice2_, slice3_)
 generated_volumes = generated_volumes.detach().cpu().numpy().squeeze() 
 
-np.save(output_path + '/output.npy', (generated_volumes + 1) / 2 * 255)
+os.makedirs(output_path, exist_ok=True)
+output_path = os.path.join(output_path, 'output')
+os.makedirs(output_path, exist_ok=True)
+np.save(output_path + f'/{path[:-4]}_{gamma}_{interpolate}.npy', (generated_volumes + 1) / 2 * 255)
 
