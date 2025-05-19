@@ -24,7 +24,7 @@ EM generalist is a cutting-edge diffusion-based foundation model designed to rev
 For most users, we recommend our web platform:
 🔗 [generativemicroscope.com](https://generativemicroscope.com)  
 We also offer a friendly user guidence for our online Demo at ./online_demo_user_guide.mp4:
-[![Watch the video](online_demo_fig.png)](https://youtu.be/PRR8iUQYXzg)
+[![Watch the video](fig_1.png)](https://youtu.be/PRR8iUQYXzg)
 ✅ No installation required  
 ✅ User-friendly interface  
 
