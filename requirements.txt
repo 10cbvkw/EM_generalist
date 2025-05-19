@@ -12,5 +12,6 @@ tifffile>=2021.11.2
 imageio>=2.9.0
 pillow>=8.0.0
 
-# Optional: For interactive visualizations or web deployment
-gradio>=3.0.0
+# Utilities and configuration
+tqdm>=4.60.0
+PyYAML>=5.4
