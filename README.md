@@ -60,12 +60,7 @@ Before running any task, you need to download the pretrained diffusion prior mod
 
 ```bash
 # Step 1: Download the pretrained model from Hugging Face
-wget https://huggingface.co/10cbvkw/EM_generalist/resolve/main/weights.pt
-
-# Step 2: Create the required directory if it doesn't exist
-mkdir -p diffusion/train/exp/
-
-# Step 3: Move the model into the expected path
+# Step 2: Move the model into the expected path
 mv weights.pt diffusion/train/exp/prior_model.pt
 ```
 
