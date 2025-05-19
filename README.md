@@ -23,6 +23,8 @@ EM generalist is a cutting-edge diffusion-based foundation model designed to rev
 ### 🌐 Online Demo (Recommended)
 For most users, we recommend our web platform:
 🔗 [generativemicroscope.com](https://generativemicroscope.com)  
+We also offer a friendly user guidence for our online Demo at ./online_demo_user_guide.mp4:
+[![Watch the video](online_demo_figure.png)](https://youtu.be/PRR8iUQYXzg)
 ✅ No installation required  
 ✅ User-friendly interface  
 
@@ -85,7 +87,7 @@ python 2D_sr.py   --path ./path/to/input_image.tif   --gamma 1.0   --factor 2
 
 # EM Generalist Web Application – User Guide
 
-*For the user guide video, please refer to ./online_app_user_guide.mp4 in this repository.
+*For the user guide video, please refer to ./online_demo_user_guide.mp4 in this repository.
 
 This web application provides a zero-shot solution for electron microscopy and volume electron microscopy (vEM) image restoration, supporting multiple tasks such as denoising, deblurring, and 2D/3D super-resolution using a unified diffusion-based foundation model.
 
