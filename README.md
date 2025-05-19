@@ -54,23 +54,39 @@ pip install -r requirements.txt
 ```
 - ✅ **Typical install time**: ~10 minutes on a standard desktop environment
 
-### 3. Demo
+### 3. Instructions for use
 
-- ✅ **Run demo on test data**:
+Before running any task, you need to download the pretrained diffusion prior model:
+
 ```bash
-python demo_inference.py --input ./demo_inputs/noisy.tif --output ./output/reconstructed.tif
+# Step 1: Download the pretrained model from Hugging Face
+wget https://huggingface.co/10cbvkw/EM_generalist/resolve/main/prior_model.pt
+
+# Step 2: Create the required directory if it doesn't exist
+mkdir -p diffusion/train/exp/
+
+# Step 3: Move the model into the expected path
+mv prior_model.pt diffusion/train/exp/prior_model.pt
 ```
-- ✅ **Expected output**: Reconstructed `.tif` image saved to output directory
-- ✅ **Expected run time**: 
-  - ~30 seconds per 512×512 image on RTX 3090  
-  - ~10 minutes per 128×128×128 3D volume
 
-### 4. Instructions for use
+Once the model is placed correctly, run inference using task-specific scripts and parameters. For example, for **2D super-resolution** using the DPS method:
 
-- ✅ **Run on your own data**:
 ```bash
-python demo_inference.py --input ./your_data/input.tif --output ./your_data/output.tif
+python 2D_sr.py   --path ./path/to/input_image.tif   --gamma 1.0   --factor 2
 ```
+
+> Replace `./path/to/input_image.tif` with your own test image path. The output will be saved to the default results directory.
+
+#### Other tasks:
+
+| Task                  | Script Name                | Notable Args                     |
+|-----------------------|----------------------------|----------------------------------|
+| 2D denoising          | `denoise.py`               | `--path`, `--gamma`              |
+| 2D deblurring         | `deblur`                   | `--path`, `--gamma`, `--factor`  |
+| 2D super resolution   | `2D_sr.py`                 | `--path`, `--gamma`, `--factor`  |
+| 3D volume restoration | `3D_sr.py`                 | `--path`, `--gamma`, `--factor`  |
+
+---
 
 # EM Generalist Web Application – User Guide
 
