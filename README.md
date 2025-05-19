@@ -60,13 +60,13 @@ Before running any task, you need to download the pretrained diffusion prior mod
 
 ```bash
 # Step 1: Download the pretrained model from Hugging Face
-wget https://huggingface.co/10cbvkw/EM_generalist/resolve/main/prior_model.pt
+wget https://huggingface.co/10cbvkw/EM_generalist/resolve/main/weights.pt
 
 # Step 2: Create the required directory if it doesn't exist
 mkdir -p diffusion/train/exp/
 
 # Step 3: Move the model into the expected path
-mv prior_model.pt diffusion/train/exp/prior_model.pt
+mv weights.pt diffusion/train/exp/prior_model.pt
 ```
 
 Once the model is placed correctly, run inference using task-specific scripts and parameters. For example, for **2D super-resolution** using the DPS method:
