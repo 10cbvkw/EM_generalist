@@ -32,6 +32,45 @@ This repository provides resources for:
 2. Model training
 3. Physical model embedding
 
+# EM Generalist Code – User Guide
+
+### 1. System requirements
+
+- ✅ **Dependencies**: Python 3.9+, PyTorch ≥ 1.12, Diffusers = 0.29.0, Accelerate ≥ 0.16, NumPy, Matplotlib, scikit-image, tifffile
+- ✅ **Operating systems tested**: Ubuntu 20.04, Ubuntu 22.04
+- ✅ **Hardware**: 
+  - Recommended: NVIDIA GPU with ≥ 16GB memory (e.g., RTX A6000, V100)
+  - CPU mode is supported but significantly slower
+
+### 2. Installation guide
+
+- ✅ **Installation instructions**:
+```bash
+git clone https://github.com/YourRepo/EM-Generalist.git
+cd EM-Generalist
+conda create -n emgen python=3.9
+conda activate emgen
+pip install -r requirements.txt
+```
+- ✅ **Typical install time**: ~10 minutes on a standard desktop environment
+
+### 3. Demo
+
+- ✅ **Run demo on test data**:
+```bash
+python demo_inference.py --input ./demo_inputs/noisy.tif --output ./output/reconstructed.tif
+```
+- ✅ **Expected output**: Reconstructed `.tif` image saved to output directory
+- ✅ **Expected run time**: 
+  - ~30 seconds per 512×512 image on RTX 3090  
+  - ~10 minutes per 128×128×128 3D volume
+
+### 4. Instructions for use
+
+- ✅ **Run on your own data**:
+```bash
+python demo_inference.py --input ./your_data/input.tif --output ./your_data/output.tif
+```
 
 # EM Generalist Web Application – User Guide
 
