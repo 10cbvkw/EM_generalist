@@ -82,7 +82,7 @@ python 2D_sr.py   --path ./path/to/input_image.tif   --gamma 1.0   --factor 2
 | Task                  | Script Name                | Notable Args                     |
 |-----------------------|----------------------------|----------------------------------|
 | 2D denoising          | `denoise.py`               | `--path`, `--gamma`              |
-| 2D deblurring         | `deblur`                   | `--path`, `--gamma`, `--factor`  |
+| 2D deblurring         | `deblur.py`                | `--path`, `--gamma`, `--factor`  |
 | 2D super resolution   | `2D_sr.py`                 | `--path`, `--gamma`, `--factor`  |
 | 3D volume restoration | `3D_sr.py`                 | `--path`, `--gamma`, `--factor`  |
 
