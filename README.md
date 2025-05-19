@@ -35,6 +35,8 @@ This repository provides resources for:
 
 # EM Generalist Web Application – User Guide
 
+*For the user guide video, please refer to ./online_app_user_guide.mp4 in this repository.
+
 This web application provides a zero-shot solution for electron microscopy and volume electron microscopy (vEM) image restoration, supporting multiple tasks such as denoising, deblurring, and 2D/3D super-resolution using a unified diffusion-based foundation model.
 
 ## 1. Job Submission Interface
